@@ -1,10 +1,13 @@
 {
+  /* 此属性指明了 ts 在编译时遵循的规则，这个属性也可以不指定，ts 会使用默认的配置进行编译。 */
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2020", //指定ECMAScript目标版本
     "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
+
+    "allowJs": true, //是否允许编译js文件
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -20,6 +23,10 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
+  /* 指定需要编译的文件列表 */
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  /* 排除的文件 */
+  "exclude": [],
+  /* 指定工程引用依赖 */
   "references": [{ "path": "./tsconfig.node.json" }]
 }

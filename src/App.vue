@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
   <div>
     <a href="https://vitejs.dev" target="_blank">
@@ -13,6 +9,12 @@ import HelloWorld from './components/HelloWorld.vue'
   </div>
   <HelloWorld msg="Vite + Vue" />
 </template>
+
+<script setup>
+  import HelloWorld from '@/components/HelloWorld.vue'
+  import { f } from '@u/commonUtil'
+  f()
+</script>
 
 <style scoped>
 .logo {
