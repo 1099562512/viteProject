@@ -4,10 +4,18 @@
     "target": "ES2020", //指定ECMAScript目标版本
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"], //TS需要引用的库
     "skipLibCheck": true,
 
     "allowJs": true, //是否允许编译js文件
+
+    /* paths 可以允许你声明 TypeScript 应该如何解析你的 require/import */
+    "baseUrl": ".",
+    "types": ["vite/client"],
+    "paths": {
+      "@/*": ["src/*"],
+      "#/*": ["types/*"]
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",
