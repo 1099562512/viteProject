@@ -1,5 +1,5 @@
 import World from './World';
-
+import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js'; 
 import { 
   Scene,
   WebGLRenderer, 
@@ -34,7 +34,7 @@ export default class Core {
     instance = this;
 
     this.scene = new Scene()
-    this.camera = new PerspectiveCamera();
+    this.camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     this.renderer = new WebGLRenderer()
 
     this.orbit_controls = new OrbitControls(this.camera, this.renderer.domElement);
@@ -49,15 +49,47 @@ export default class Core {
   render() {
     this.renderer.setAnimationLoop(() => {
 			this.renderer.render(this.scene, this.camera)
+      this.world.update()
       this.orbit_controls.update()
 		});
+
+    //响应式画布
+    window.addEventListener('resize', () => {
+      this.renderer.setSize(window.innerWidth, window.innerHeight)
+      //重置摄像机宽高比
+      this.camera.aspect = window.innerWidth / window.innerHeight
+      //更新摄像机投影矩阵,在任何参数被改变以后必须被调用。
+      this.camera.updateProjectionMatrix()
+    })
+
+    /* const obj = {
+      myBoolean: true,
+      myString: 'lili-gui',
+      myNumber: 1,
+      myFunction: function() {
+        alert('hi')
+      }
+    }
+    const gui = new GUI()
+    gui.add(obj, 'myBoolean')
+    gui.add(obj, 'myString') // 文本
+    gui.add(obj, 'myNumber') // 数字
+    gui.add(obj, 'myFunction') // 按钮 */
+
+    const updateCamera = () => {
+      this.camera.updateProjectionMatrix()
+    }
+    const gui = new GUI()
+    gui.add(this.camera, 'fov', 1, 180).onChange(updateCamera)
+    gui.add(this.camera, 'near', 1, 200).onChange(updateCamera)
+    gui.add(this.camera, 'far', 1, 200).onChange(updateCamera)
   }
 
   private _initScene() {
     this.scene.background = new Color(0x000000);
   }
   private _initCamera() {
-    let x = 18, y = 18, z = 18;
+    let x = 10, y = 5, z = 5;
     this.camera.position.set(x,y,z)
   }
   private _initRenderer() {
@@ -65,20 +97,5 @@ export default class Core {
     this.renderer.setSize(window.innerWidth, window.innerHeight); //设置渲染尺寸大小
     document.querySelector("#three")?.appendChild(this.renderer.domElement);
   }
+
 }
-
-/* let scene : Scene;
-export const initScene = () => {
-  scene = new Scene()
-}
-
-export const initCamera = () => {
-  const camera = new PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-  let x = 0, y = 8, z = 0;
-  camera.position.set(x,y,z)
-  scene.add(camera)
-}
-
-export const initRenderer = () => {
-
-} */
