@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div id="three" class="threeRef" ref="threeRef" style="height: 100vh;width: 100vw;"></div>
+  <div class="three-wrap" style="height: 100%; width: 100%">
+    <div id="three" class="threeRef" ref="threeRef" ></div>
   </div>
 
 </template>
@@ -16,8 +16,8 @@
   //console.log(threeRef.value);
 
   onMounted(() => {
-    const core = new Core()
-    core.render()
+    const core = new Core('.three-wrap')
+    core.render() 
 
     /* //创建一个场景
     const scene = new Scene()

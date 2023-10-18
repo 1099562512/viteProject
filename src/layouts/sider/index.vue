@@ -4,39 +4,36 @@
     v-model:collapsed="collapsed"
     trigger=""
     collapsible
-  >
-    <Menu>
-      <template v-for="item in state.items">
-        
-      </template>
-    </Menu>
+  > 
+    <BasicMenu :items="state.items"></BasicMenu>
   </LayoutSider>
 </template>
 <script lang="ts" setup>
-  import { Drawer, LayoutSider, Menu } from 'ant-design-vue'
-  import { ref, reactive } from 'vue'
+  import { LayoutSider, Menu, SubMenu, MenuItem  } from 'ant-design-vue'
+  import type { MenuInfo } from 'ant-design-vue/lib/menu/src/interface';
+  import { BasicMenu } from '@/components/Menu';
+  import { usePermissionStore } from '@/store/modules/permission';
+
+  import { ref, reactive, h } from 'vue'
+  import {
+    MenuFoldOutlined,
+    MenuUnfoldOutlined,
+    PieChartOutlined,
+    MailOutlined,
+    DesktopOutlined,
+    InboxOutlined,
+    AppstoreOutlined,
+  } from '@ant-design/icons-vue';
+
+  const permissionStore = usePermissionStore()
+  console.log(permissionStore.getFrontMenuList);
   const collapsed = ref(false) //Ref<boolean>
   const state = reactive({
-    items: [
-      {
-        title: "ThreeJs",
-        path: "ThreeeJs",
-        redirect: "ThreeJs/demo",
-        icon: "",
-        name: "ThreeJs",
-        orderNo: 1,
-        children: [
-          {
-            title: "ThreeJs",
-            path: "ThreeeJs/demo",
-            icon: "",
-            name: "ThreeJs"
-          }
-        ]
-      }
-    ]
+    selectedKeys: [],
+    openKeys: [],
+    preOpenKeys: [],
+    items: permissionStore.getFrontMenuList
   })
-
 </script>
 <style lang="less" scoped>
 </style>

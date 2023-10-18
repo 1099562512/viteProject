@@ -18,14 +18,18 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 //变量后使用 ！：表示类型推断排除null、undefined
 let instance : Core | null = null
 
+
 export default class Core {
   scene!: Scene;
 	renderer!: WebGLRenderer;
 	camera!: PerspectiveCamera;
   world!: World;
   orbit_controls!: OrbitControls; //轨道控制器
+  container !: Element | null;
+  width: number = 0;
+  height: number = 0;
 
-  constructor() {
+  constructor(domId ?: string) {
     //单例模式
     //debugger
     if(instance) {
@@ -34,9 +38,13 @@ export default class Core {
     instance = this;
 
     this.scene = new Scene()
-    this.camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    if(domId) {
+      this.container = document.querySelector(`${domId}`)
+    }
+    this._setAspect()
+    this.camera = new PerspectiveCamera(75, this.width / this.height, 0.1, 1000);
+    
     this.renderer = new WebGLRenderer()
-
     this.orbit_controls = new OrbitControls(this.camera, this.renderer.domElement);
 
     this._initScene()
@@ -55,9 +63,11 @@ export default class Core {
 
     //响应式画布
     window.addEventListener('resize', () => {
-      this.renderer.setSize(window.innerWidth, window.innerHeight)
+      this._setAspect()
+      const {width, height} = this
+      this.renderer.setSize(width, height)
       //重置摄像机宽高比
-      this.camera.aspect = window.innerWidth / window.innerHeight
+      this.camera.aspect = width / height
       //更新摄像机投影矩阵,在任何参数被改变以后必须被调用。
       this.camera.updateProjectionMatrix()
     })
@@ -93,9 +103,13 @@ export default class Core {
     this.camera.position.set(x,y,z)
   }
   private _initRenderer() {
+    const { width, height } = this
     this.renderer.shadowMap.enabled = true; //是否启用阴影贴图
-    this.renderer.setSize(window.innerWidth, window.innerHeight); //设置渲染尺寸大小
+    this.renderer.setSize(width, height); //设置渲染尺寸大小
     document.querySelector("#three")?.appendChild(this.renderer.domElement);
   }
-
+  private _setAspect() {
+    this.width = this.container ? this.container?.clientWidth : window.innerWidth
+    this.height = this.container ? this.container?.clientHeight : window.innerHeight
+  }
 }

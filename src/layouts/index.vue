@@ -1,10 +1,10 @@
 <template>
   <Layout>
     <Sider></Sider>
-    <Layout>
+    <Layout style="height: 100vh;">
       <LayoutHeader>2</LayoutHeader>
-      <Content></Content>
-      <LayoutFooter>4</LayoutFooter>
+      <Content style="flex-grow: 1;"></Content>
+      <!-- <LayoutFooter>4</LayoutFooter> -->
     </Layout>
   </Layout>
 </template>
