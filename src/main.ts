@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import 'uno.css' //引入unocss，原子化css
 import './style.css'
 import App from './App.vue'
 import { setupStore } from '@/store'

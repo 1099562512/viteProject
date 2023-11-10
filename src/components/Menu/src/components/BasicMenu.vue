@@ -1,7 +1,10 @@
 <template>
   <AntMenu
+    theme="dark"
     mode="inline"
     @click="handleClick"
+    :open-keys="menuState.openKeys"
+    :selected-keys="menuState.selectedKeys"
   >
     <template v-for="item in items" :key="item.path">
       <BasicSubMenu :item="item"></BasicSubMenu>
@@ -14,7 +17,7 @@
   import type {Menu } from "@/router/types"
   import { Menu as AntMenu } from 'ant-design-vue'
   import { useRouter } from 'vue-router';
-  import { getAsyncMenus } from '@/router/menus' 
+  import { reactive } from 'vue';
   import BasicSubMenu from './BasicSubMenu.vue';
 
   const props = defineProps({
@@ -24,15 +27,21 @@
     }
   })
   const {items} = props
+
+  const menuState = reactive({
+    openKeys: ['/ThreeJs'],
+    selectedKeys : ['/ThreeJs/demo']
+  })
+
   const router = useRouter()
   const handleClick = (e : MenuInfo) => {
     console.log(e);
+    menuState.selectedKeys = [e.key]
     router.push(e.key)
    /*  getAsyncMenus()
     console.log(key);
     router.push(key) */
   }
-  //console.log(items);
 </script>
 <style lang="less" scoped>
 

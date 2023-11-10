@@ -86,13 +86,13 @@ export default class Core {
     gui.add(obj, 'myNumber') // 数字
     gui.add(obj, 'myFunction') // 按钮 */
 
-    const updateCamera = () => {
+    /* const updateCamera = () => {
       this.camera.updateProjectionMatrix()
     }
     const gui = new GUI()
     gui.add(this.camera, 'fov', 1, 180).onChange(updateCamera)
     gui.add(this.camera, 'near', 1, 200).onChange(updateCamera)
-    gui.add(this.camera, 'far', 1, 200).onChange(updateCamera)
+    gui.add(this.camera, 'far', 1, 200).onChange(updateCamera) */
   }
 
   private _initScene() {

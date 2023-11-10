@@ -18,8 +18,8 @@
   onMounted(() => {
     const core = new Core('.three-wrap')
     core.render() 
-
-    /* //创建一个场景
+  }) 
+  /* //创建一个场景
     const scene = new Scene()
     //创建一个相机
     const camera = new PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
@@ -74,7 +74,6 @@
       requestAnimationFrame(animate)
       control.update()
     } */
-  })
 </script>
 
 <style scoped>
