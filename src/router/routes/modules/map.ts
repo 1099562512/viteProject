@@ -10,6 +10,16 @@ const Map : RouteRecordRaw = {
       path: "baiduMap",
       name: "baiduMap",
       component: () => import('@/views/Map/baiduMap.vue')
+    },
+    {
+      path: "Leaflet",
+      name: "leaflet",
+      component: () => import('@/views/Map/Leaflet.vue')
+    },
+    {
+      path: "aMap",
+      name: "amap",
+      component: () => import('@/views/Map/aMap.vue')
     }
   ]
 }

@@ -8,6 +8,8 @@ import { setupRouterGuard } from './router/guard/index.ts'
 
 import "../types/global.d.ts"
 
+import "leaflet/dist/leaflet.css"
+
 function initApp() {
   const app = createApp(App)
   //配置Store
