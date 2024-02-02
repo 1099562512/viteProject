@@ -9,8 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/vue": "^2.0.0",
     "@vueuse/core": "^10.6.1",
     "ant-design-vue": "^4.0.3",
+    "echarts": "^5.4.3",
+    "leafer-ui": "^1.0.0-rc.9",
     "leaflet": "^1.9.4",
     "leaflet-draw": "^1.0.4",
     "pinia": "^2.1.4",
